@@ -1,3 +1,14 @@
+<p align="center">
+  <img src="assets/hero.svg" alt="WRAITH — Browser intelligence capture for personal knowledge vaults" width="900"/>
+</p>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/platform-macOS%20·%20Linux-lightgrey?style=flat-square" alt="Platform"/>
+  <img src="https://img.shields.io/badge/size-~6MB-green?style=flat-square" alt="Binary Size"/>
+  <img src="https://img.shields.io/badge/vault-plain%20markdown-blue?style=flat-square" alt="Plain Markdown"/>
+  <img src="https://img.shields.io/badge/license-MIT-blue?style=flat-square" alt="MIT License"/>
+</p>
+
 # WRAITH
 
 Browser intelligence capture for personal knowledge vaults.
@@ -6,12 +17,9 @@ WRAITH watches what you save — bookmarks, selections, tweets, starred repos �
 
 Everything stays local. No cloud sync, no telemetry, no third-party storage.
 
-```
-Browser ──WebSocket──► Bridge ──► Queue ──► Scout ──► Librarian ──► Vault
-                                    │         │                        │
-                                    │         └─ YouTube URL? ─► yt-dlp + Librarian extract ─► brain/youtube/
-                                    └── dedup (fingerprint + Jaccard) ─┘
-```
+<p align="center">
+  <img src="assets/ingest-flow.svg" alt="WRAITH ingest flow" width="800"/>
+</p>
 
 ## End-to-End Flow
 
@@ -70,14 +78,9 @@ go test ./internal/... -v
 
 Every capture passes through a deterministic state machine:
 
-```
-captured → queued → processing → filed
-                  → deduped
-                  → discarded (scout: discard)
-                  → failed (librarian write error)
-                  → triaged → filed
-                            → mission_candidate → filed
-```
+<p align="center">
+  <img src="assets/queue-state-machine.svg" alt="Queue state machine" width="800"/>
+</p>
 
 All transitions are recorded in `ingest_history[]` on the Capture struct with timestamps and notes.
 
