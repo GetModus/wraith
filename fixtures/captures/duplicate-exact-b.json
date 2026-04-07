@@ -1,0 +1,22 @@
+{
+  "id": "fixture-dedup-exact-b",
+  "source": "context-menu",
+  "url": "https://example.com/same-page/",
+  "title": "Same Page",
+  "site_name": "Example",
+  "author": "",
+  "body_text": "This is the exact same content for dedup testing.",
+  "selected": "",
+  "headings": [],
+  "links": [],
+  "images": [],
+  "tweet": null,
+  "meta": {},
+  "captured_at": "2026-04-07T14:36:05Z",
+  "status": "queued",
+  "ingest_state": "captured",
+  "fingerprint": "",
+  "duplicate_of": "",
+  "error": "",
+  "vault_path": ""
+}

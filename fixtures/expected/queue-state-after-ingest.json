@@ -1,0 +1,10 @@
+{
+  "total": 9,
+  "queued": 0,
+  "processing": 0,
+  "done": 6,
+  "failed": 0,
+  "deduped": 2,
+  "discarded": 1,
+  "note": "duplicate-exact-b deduped at ingress (identical fingerprint via trailing-slash normalization), duplicate-near-b near-deduped at ingress (Jaccard ~0.97, same normalized URL, 'spikes' vs 'surges'), tweet discarded by default scout (title + body_text + selected all empty — tweet.Text is not checked by scout)"
+}

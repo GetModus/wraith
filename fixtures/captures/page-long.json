@@ -1,0 +1,50 @@
+{
+  "id": "fixture-page-long",
+  "source": "extension",
+  "url": "https://blog.example.com/distributed-systems-2026",
+  "title": "Distributed Systems in 2026",
+  "site_name": "Example Engineering Blog",
+  "author": "Alex Chen",
+  "body_text": "The landscape of distributed systems has shifted dramatically over the past two years. What was once dominated by Kubernetes-centric architectures has given way to a more nuanced ecosystem where the choice of orchestration depends heavily on workload characteristics rather than industry momentum.\n\nLocal-first architectures have emerged as a serious alternative for applications that prioritize user sovereignty and offline capability. The CRDTs that powered early experiments in collaborative editing have matured into general-purpose state synchronization primitives. Libraries like Automerge 3.0 and Yjs now handle conflict resolution for arbitrary data structures with acceptable performance characteristics.\n\nThe rise of edge computing has blurred the line between client and server. Modern applications increasingly run significant computation on user devices, treating cloud infrastructure as a synchronization layer rather than the primary compute substrate. This pattern reduces latency, improves privacy, and cuts infrastructure costs.\n\nConsensus protocols have seen practical innovation. Raft remains the workhorse for leader-based replication, but leaderless approaches like EPaxos derivatives have found production use cases in geo-distributed databases where cross-region leader election introduces unacceptable latency.\n\nObservability tooling has converged around OpenTelemetry as the de facto standard. The days of vendor-specific instrumentation libraries are effectively over. Trace-based testing, where distributed traces serve as the basis for integration test assertions, has moved from research papers to mainstream practice.\n\nThe serverless execution model continues to evolve. Cold start times have dropped below 10 milliseconds for most runtimes, making serverless viable for latency-sensitive workloads that were previously excluded. WebAssembly-based runtimes have emerged as a lightweight alternative to container-based isolation, offering sub-millisecond startup with a smaller attack surface.\n\nMessage queue architectures have bifurcated into two camps. High-throughput pipelines still favor Kafka-style log-based brokers, but task distribution systems have largely moved to lighter-weight solutions built on Redis Streams or purpose-built queue services. The overhead of running a full Kafka cluster for simple job dispatch is no longer considered acceptable.\n\nService mesh adoption has plateaued. The complexity overhead proved too high for organizations below a certain scale. Instead, lightweight sidecar-free approaches using eBPF-based networking have gained traction, providing much of the observability and traffic management benefit without the operational burden.",
+  "selected": "",
+  "headings": [
+    {"level": 1, "text": "Distributed Systems in 2026"},
+    {"level": 2, "text": "Local-First Architectures"},
+    {"level": 2, "text": "Edge Computing"},
+    {"level": 2, "text": "Consensus Protocols"},
+    {"level": 2, "text": "Observability"},
+    {"level": 2, "text": "Serverless Evolution"},
+    {"level": 2, "text": "Message Queues"},
+    {"level": 2, "text": "Service Mesh Reality Check"}
+  ],
+  "links": [
+    {"text": "Automerge 3.0", "href": "https://example.com/automerge"},
+    {"text": "Yjs Documentation", "href": "https://example.com/yjs-docs"},
+    {"text": "EPaxos Paper", "href": "https://example.com/papers/epaxos"},
+    {"text": "OpenTelemetry", "href": "https://example.com/otel"},
+    {"text": "Trace-Based Testing", "href": "https://example.com/trace-testing"},
+    {"text": "WebAssembly Runtimes Benchmark", "href": "https://example.com/wasm-bench"},
+    {"text": "Redis Streams Guide", "href": "https://example.com/redis-streams"},
+    {"text": "eBPF Networking", "href": "https://example.com/ebpf-net"},
+    {"text": "Author's Previous Post", "href": "https://blog.example.com/systems-2024"},
+    {"text": "Discussion on HN", "href": "https://example.com/hn/discussion"}
+  ],
+  "images": [
+    {"src": "https://blog.example.com/images/dist-arch-diagram.png", "alt": "Modern distributed architecture diagram", "width": 1200, "height": 800},
+    {"src": "https://blog.example.com/images/latency-comparison.png", "alt": "Cold start latency comparison chart", "width": 900, "height": 600},
+    {"src": "https://blog.example.com/images/mesh-adoption.png", "alt": "Service mesh adoption trends", "width": 900, "height": 500}
+  ],
+  "tweet": null,
+  "meta": {
+    "og:type": "article",
+    "og:description": "A survey of how distributed systems practice has evolved heading into 2026.",
+    "article:published_time": "2026-03-15T09:00:00Z"
+  },
+  "captured_at": "2026-04-07T14:32:00Z",
+  "status": "queued",
+  "ingest_state": "captured",
+  "fingerprint": "",
+  "duplicate_of": "",
+  "error": "",
+  "vault_path": ""
+}

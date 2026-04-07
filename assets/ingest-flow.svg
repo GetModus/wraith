@@ -1,0 +1,134 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="480" viewBox="0 0 800 480">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0d1117;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#161b22;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <rect width="800" height="480" fill="url(#bg)" rx="12"/>
+
+  <!-- Title -->
+  <text x="400" y="35" font-family="system-ui, sans-serif" font-size="16" fill="#8b949e" text-anchor="middle" letter-spacing="2">INGEST FLOW</text>
+
+  <!-- Safari Extension -->
+  <rect x="20" y="65" width="100" height="48" rx="8" fill="#1c2333" stroke="#58a6ff" stroke-width="1"/>
+  <text x="70" y="86" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#e6edf3" font-weight="600">Safari</text>
+  <text x="70" y="101" text-anchor="middle" font-family="monospace" font-size="10" fill="#8b949e">Extension</text>
+
+  <!-- Arrow 1 -->
+  <line x1="120" y1="89" x2="155" y2="89" stroke="#58a6ff" stroke-width="1.5" opacity="0.6"/>
+  <polygon points="155,84 165,89 155,94" fill="#58a6ff" opacity="0.6"/>
+
+  <!-- WebSocket -->
+  <rect x="167" y="65" width="90" height="48" rx="8" fill="#1c2333" stroke="#58a6ff" stroke-width="1"/>
+  <text x="212" y="93" text-anchor="middle" font-family="monospace" font-size="11" fill="#58a6ff">WebSocket</text>
+
+  <!-- Arrow 2 -->
+  <line x1="257" y1="89" x2="292" y2="89" stroke="#58a6ff" stroke-width="1.5" opacity="0.6"/>
+  <polygon points="292,84 302,89 292,94" fill="#58a6ff" opacity="0.6"/>
+
+  <!-- Bridge -->
+  <rect x="304" y="65" width="80" height="48" rx="8" fill="#1c2333" stroke="#58a6ff" stroke-width="1"/>
+  <text x="344" y="93" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#e6edf3" font-weight="600">Bridge</text>
+
+  <!-- Arrow 3 -->
+  <line x1="384" y1="89" x2="419" y2="89" stroke="#58a6ff" stroke-width="1.5" opacity="0.6"/>
+  <polygon points="419,84 429,89 419,94" fill="#58a6ff" opacity="0.6"/>
+
+  <!-- Queue -->
+  <rect x="431" y="65" width="74" height="48" rx="8" fill="#1c2333" stroke="#bc8cff" stroke-width="1.5"/>
+  <text x="468" y="93" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#e6edf3" font-weight="600">Queue</text>
+
+  <!-- Arrow 4 (to YouTube check) -->
+  <line x1="505" y1="89" x2="530" y2="89" stroke="#58a6ff" stroke-width="1.5" opacity="0.6"/>
+  <polygon points="530,84 540,89 530,94" fill="#58a6ff" opacity="0.6"/>
+
+  <!-- YouTube URL Check (diamond) -->
+  <polygon points="575,60 620,89 575,118 530,89" fill="#1c2333" stroke="#58a6ff" stroke-width="1.5"/>
+  <text x="575" y="86" text-anchor="middle" font-family="system-ui, sans-serif" font-size="9" fill="#e6edf3" font-weight="600">YouTube</text>
+  <text x="575" y="97" text-anchor="middle" font-family="system-ui, sans-serif" font-size="9" fill="#8b949e">URL?</text>
+
+  <!-- YouTube YES arrow (down) -->
+  <line x1="575" y1="118" x2="575" y2="158" stroke="#58a6ff" stroke-width="1.5" opacity="0.6"/>
+  <polygon points="570,158 575,168 580,158" fill="#58a6ff" opacity="0.6"/>
+  <text x="586" y="142" font-family="monospace" font-size="9" fill="#7ee787" font-weight="600">YES</text>
+
+  <!-- YouTube ingest box -->
+  <rect x="498" y="170" width="154" height="60" rx="8" fill="#1c2333" stroke="#58a6ff" stroke-width="1"/>
+  <text x="575" y="190" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#e6edf3" font-weight="600">YouTube Direct Ingest</text>
+  <text x="575" y="205" text-anchor="middle" font-family="monospace" font-size="9" fill="#8b949e">yt-dlp + transcript</text>
+  <text x="575" y="219" text-anchor="middle" font-family="monospace" font-size="9" fill="#8b949e">+ Librarian extraction</text>
+
+  <!-- YouTube to Vault arrow -->
+  <line x1="652" y1="200" x2="690" y2="200" stroke="#7ee787" stroke-width="1.5" opacity="0.5"/>
+  <line x1="690" y1="200" x2="690" y2="155" stroke="#7ee787" stroke-width="1.5" opacity="0.5"/>
+  <polygon points="685,159 690,149 695,159" fill="#7ee787" opacity="0.5"/>
+
+  <!-- brain/youtube label -->
+  <text x="718" y="182" font-family="monospace" font-size="9" fill="#7ee787" opacity="0.8">brain/youtube/</text>
+
+  <!-- YouTube NO arrow (right, to Scout) -->
+  <line x1="620" y1="89" x2="648" y2="89" stroke="#58a6ff" stroke-width="1.5" opacity="0.6"/>
+  <polygon points="648,84 658,89 648,94" fill="#58a6ff" opacity="0.6"/>
+  <text x="634" y="80" font-family="monospace" font-size="9" fill="#8b949e">NO</text>
+
+  <!-- Scout -->
+  <rect x="660" y="65" width="56" height="48" rx="8" fill="#1c2333" stroke="#bc8cff" stroke-width="1"/>
+  <text x="688" y="93" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#e6edf3" font-weight="600">Scout</text>
+
+  <!-- Arrow Scout to Librarian (wrap around) -->
+  <line x1="716" y1="89" x2="726" y2="89" stroke="#bc8cff" stroke-width="1" opacity="0.5"/>
+  <line x1="726" y1="89" x2="726" y2="58" stroke="#bc8cff" stroke-width="1" opacity="0.5"/>
+  <line x1="726" y1="58" x2="762" y2="58" stroke="#bc8cff" stroke-width="1" opacity="0.5"/>
+  <line x1="762" y1="58" x2="762" y2="65" stroke="#bc8cff" stroke-width="1" opacity="0.5"/>
+
+  <!-- Librarian -->
+  <rect x="730" y="65" width="62" height="48" rx="8" fill="#1c2333" stroke="#bc8cff" stroke-width="1"/>
+  <text x="761" y="93" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#e6edf3" font-weight="600">Librarian</text>
+
+  <!-- Vault (shared destination) -->
+  <rect x="660" y="126" width="132" height="36" rx="8" fill="#1c2333" stroke="#7ee787" stroke-width="1.5"/>
+  <text x="726" y="148" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#7ee787" font-weight="600">Vault</text>
+
+  <!-- Librarian to Vault arrow -->
+  <line x1="761" y1="113" x2="761" y2="126" stroke="#7ee787" stroke-width="1.5" opacity="0.5"/>
+
+  <!-- Branch down from Queue for dedup -->
+  <line x1="468" y1="113" x2="468" y2="252" stroke="#d29922" stroke-width="1.5" opacity="0.5"/>
+  <polygon points="463,252 468,262 473,252" fill="#d29922" opacity="0.5"/>
+
+  <!-- Dedup box -->
+  <rect x="355" y="268" width="226" height="85" rx="8" fill="#1c2333" stroke="#d29922" stroke-width="1"/>
+  <text x="468" y="292" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#e6edf3" font-weight="600">Deduplication Check</text>
+  <line x1="375" y1="300" x2="561" y2="300" stroke="#30363d" stroke-width="0.5"/>
+  <text x="468" y="319" text-anchor="middle" font-family="monospace" font-size="10" fill="#8b949e">Fingerprint (SHA-256 exact)</text>
+  <text x="468" y="338" text-anchor="middle" font-family="monospace" font-size="10" fill="#8b949e">Near-duplicate (Jaccard >= 0.82)</text>
+
+  <!-- Dedup outcomes -->
+  <!-- Pass arrow (right side, back up) -->
+  <line x1="581" y1="310" x2="612" y2="310" stroke="#7ee787" stroke-width="1" stroke-dasharray="4,3" opacity="0.5"/>
+  <line x1="612" y1="310" x2="612" y2="118" stroke="#7ee787" stroke-width="1" stroke-dasharray="4,3" opacity="0.5"/>
+  <polygon points="607,122 612,112 617,122" fill="#7ee787" opacity="0.5"/>
+  <text x="620" y="220" font-family="monospace" font-size="9" fill="#7ee787" opacity="0.7">PASS</text>
+
+  <!-- Deduped arrow (left side) -->
+  <line x1="355" y1="310" x2="312" y2="310" stroke="#d29922" stroke-width="1.5" opacity="0.5"/>
+  <polygon points="316,305 306,310 316,315" fill="#d29922" opacity="0.5"/>
+
+  <!-- Deduped terminal -->
+  <rect x="224" y="294" width="82" height="32" rx="8" fill="#1c2333" stroke="#d29922" stroke-width="1.5"/>
+  <text x="265" y="314" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#d29922" font-weight="600">Deduped</text>
+
+  <!-- Legend -->
+  <rect x="20" y="410" width="760" height="55" rx="8" fill="#1c2333" stroke="#30363d" stroke-width="1"/>
+  <circle cx="50" cy="432" r="5" fill="#58a6ff"/>
+  <text x="62" y="436" font-family="system-ui, sans-serif" font-size="10" fill="#8b949e">Data flow</text>
+  <circle cx="148" cy="432" r="5" fill="#7ee787"/>
+  <text x="160" y="436" font-family="system-ui, sans-serif" font-size="10" fill="#8b949e">Success</text>
+  <circle cx="230" cy="432" r="5" fill="#d29922"/>
+  <text x="242" y="436" font-family="system-ui, sans-serif" font-size="10" fill="#8b949e">Dedup</text>
+  <circle cx="308" cy="432" r="5" fill="#bc8cff"/>
+  <text x="320" y="436" font-family="system-ui, sans-serif" font-size="10" fill="#8b949e">Assessment</text>
+  <text x="400" y="454" font-family="system-ui, sans-serif" font-size="10" fill="#8b949e" text-anchor="middle">YouTube URLs bypass Scout/Librarian for dedicated transcript-aware ingest</text>
+</svg>

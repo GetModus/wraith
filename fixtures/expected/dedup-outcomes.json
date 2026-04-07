@@ -1,0 +1,19 @@
+{
+  "exact_dedup": {
+    "canonical": "fixture-dedup-exact-a",
+    "folded": "fixture-dedup-exact-b",
+    "method": "fingerprint",
+    "fingerprint": "2864f8ca222d057cb10315f0",
+    "note": "identical source|URL|title|body produces same SHA-256 fingerprint; URL trailing slash stripped by normalizeURLKey"
+  },
+  "near_dedup": {
+    "canonical": "fixture-dedup-near-a",
+    "folded": "fixture-dedup-near-b",
+    "method": "jaccard",
+    "threshold": 0.82,
+    "computed_similarity": 0.9737,
+    "fingerprint_a": "1e12cd74fe9c61f39cc9b188",
+    "fingerprint_b": "60a53c9f765824d4015345c7",
+    "note": "same normalized URL + Jaccard word similarity 0.97 on title+body; differs by one word within 512-char fingerprint window ('spikes' vs 'surges') so fingerprints diverge but near-dedup catches it"
+  }
+}

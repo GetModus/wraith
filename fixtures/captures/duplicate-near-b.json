@@ -1,0 +1,22 @@
+{
+  "id": "fixture-dedup-near-b",
+  "source": "context-menu",
+  "url": "https://example.com/article?v=1",
+  "title": "agent architecture notes",
+  "site_name": "Example Wiki",
+  "author": "",
+  "body_text": "Queue-based agent architecture provides reliable task distribution across worker pools. Each agent maintains a local state machine tracking transitions from idle to active to complete. The dispatcher assigns work based on capacity signals and priority weights. Backpressure mechanisms prevent queue overflow during traffic surges. Health checks run on a configurable interval to detect stalled workers. Failed tasks route to a dead letter queue for manual inspection. The retry policy uses exponential backoff with jitter to avoid thundering herd problems. Metrics collection feeds into a central dashboard for operational visibility.",
+  "selected": "",
+  "headings": [],
+  "links": [],
+  "images": [],
+  "tweet": null,
+  "meta": {},
+  "captured_at": "2026-04-07T14:37:10Z",
+  "status": "queued",
+  "ingest_state": "captured",
+  "fingerprint": "",
+  "duplicate_of": "",
+  "error": "",
+  "vault_path": ""
+}

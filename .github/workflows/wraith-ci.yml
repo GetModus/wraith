@@ -1,0 +1,44 @@
+name: WRAITH CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    name: Test & Lint
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version: '1.22'
+          cache-dependency-path: go.sum
+
+      - name: Go vet
+        run: go vet ./...
+
+      - name: gofmt check
+        run: |
+          UNFORMATTED=$(gofmt -l internal/ cmd/)
+          if [ -n "$UNFORMATTED" ]; then
+            echo "gofmt violations:"
+            echo "$UNFORMATTED"
+            exit 1
+          fi
+
+      - name: Unit tests
+        run: go test ./internal/... -v -count=1
+
+      - name: Fixture JSON validation
+        run: |
+          for f in fixtures/captures/*.json fixtures/expected/*.json; do
+            [ -f "$f" ] || continue
+            python3 -m json.tool "$f" > /dev/null || { echo "Invalid JSON: $f"; exit 1; }
+          done
+
+      - name: Build check
+        run: go build -o /dev/null ./cmd/wraith-bridge/

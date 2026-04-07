@@ -1,0 +1,22 @@
+{
+  "id": "fixture-selection",
+  "source": "context-menu",
+  "url": "https://docs.example.com/api",
+  "title": "API Documentation",
+  "site_name": "Example Docs",
+  "author": "",
+  "body_text": "Welcome to the Example API documentation. Use the sidebar to navigate between endpoints.",
+  "selected": "The rate limiting system uses a sliding window algorithm with per-key granularity. Each API key is allocated a base quota of 1000 requests per minute. Burst capacity allows temporary overages up to 150% of the base quota for windows shorter than 10 seconds. When the quota is exceeded, the server returns HTTP 429 with a Retry-After header indicating the number of seconds until the window resets. Authenticated requests from verified partners receive a 5x multiplier on their base allocation.",
+  "headings": [],
+  "links": [],
+  "images": [],
+  "tweet": null,
+  "meta": {},
+  "captured_at": "2026-04-07T14:34:00Z",
+  "status": "queued",
+  "ingest_state": "captured",
+  "fingerprint": "",
+  "duplicate_of": "",
+  "error": "",
+  "vault_path": ""
+}

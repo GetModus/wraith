@@ -1,0 +1,112 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="460" viewBox="0 0 800 460">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0d1117;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#161b22;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <rect width="800" height="460" fill="url(#bg)" rx="12"/>
+
+  <!-- Title -->
+  <text x="400" y="30" font-family="system-ui, sans-serif" font-size="16" fill="#8b949e" text-anchor="middle" letter-spacing="2">QUEUE STATE MACHINE</text>
+
+  <!-- CAPTURED state (initial) -->
+  <rect x="30" y="115" width="100" height="38" rx="19" fill="#1c2333" stroke="#58a6ff" stroke-width="1.5"/>
+  <text x="80" y="138" text-anchor="middle" font-family="monospace" font-size="11" fill="#58a6ff">captured</text>
+  <!-- Initial indicator -->
+  <circle cx="15" cy="134" r="4" fill="#58a6ff"/>
+  <line x1="19" y1="134" x2="30" y2="134" stroke="#58a6ff" stroke-width="1.5"/>
+
+  <!-- Arrow captured -> queued -->
+  <line x1="130" y1="134" x2="190" y2="134" stroke="#58a6ff" stroke-width="1.5" opacity="0.6"/>
+  <polygon points="190,129 200,134 190,139" fill="#58a6ff" opacity="0.6"/>
+
+  <!-- QUEUED state -->
+  <rect x="202" y="115" width="82" height="38" rx="19" fill="#1c2333" stroke="#58a6ff" stroke-width="1.5"/>
+  <text x="243" y="138" text-anchor="middle" font-family="monospace" font-size="11" fill="#58a6ff">queued</text>
+
+  <!-- Arrow queued -> processing -->
+  <line x1="284" y1="134" x2="350" y2="134" stroke="#58a6ff" stroke-width="1.5" opacity="0.6"/>
+  <polygon points="350,129 360,134 350,139" fill="#58a6ff" opacity="0.6"/>
+
+  <!-- PROCESSING state -->
+  <rect x="362" y="115" width="110" height="38" rx="19" fill="#1c2333" stroke="#bc8cff" stroke-width="1.5"/>
+  <text x="417" y="138" text-anchor="middle" font-family="monospace" font-size="11" fill="#bc8cff">processing</text>
+
+  <!-- Arrow processing -> filed (direct) -->
+  <line x1="472" y1="126" x2="565" y2="78" stroke="#7ee787" stroke-width="1.5" opacity="0.5"/>
+  <polygon points="560,73 571,74 564,83" fill="#7ee787" opacity="0.5"/>
+  <text x="525" y="93" font-family="monospace" font-size="9" fill="#7ee787" opacity="0.7">done</text>
+
+  <!-- FILED state (terminal success) -->
+  <rect x="573" y="58" width="76" height="38" rx="19" fill="#1c2333" stroke="#7ee787" stroke-width="2"/>
+  <text x="611" y="81" text-anchor="middle" font-family="monospace" font-size="12" fill="#7ee787" font-weight="600">filed</text>
+
+  <!-- Arrow processing -> triaged -->
+  <line x1="472" y1="140" x2="550" y2="174" stroke="#bc8cff" stroke-width="1.5" opacity="0.5"/>
+  <polygon points="548,169 559,176 550,180" fill="#bc8cff" opacity="0.5"/>
+
+  <!-- TRIAGED state -->
+  <rect x="563" y="158" width="82" height="38" rx="19" fill="#1c2333" stroke="#bc8cff" stroke-width="1.5"/>
+  <text x="604" y="181" text-anchor="middle" font-family="monospace" font-size="11" fill="#bc8cff">triaged</text>
+
+  <!-- Arrow triaged -> filed -->
+  <line x1="633" y1="158" x2="621" y2="96" stroke="#7ee787" stroke-width="1.5" opacity="0.5"/>
+  <polygon points="616,99 623,91 627,101" fill="#7ee787" opacity="0.5"/>
+
+  <!-- Arrow triaged -> mission_candidate -->
+  <line x1="645" y1="184" x2="685" y2="224" stroke="#bc8cff" stroke-width="1.5" opacity="0.5"/>
+  <polygon points="681,220 692,228 687,218" fill="#bc8cff" opacity="0.5"/>
+
+  <!-- MISSION_CANDIDATE state -->
+  <rect x="620" y="228" width="155" height="38" rx="19" fill="#1c2333" stroke="#bc8cff" stroke-width="1.5"/>
+  <text x="697" y="251" text-anchor="middle" font-family="monospace" font-size="10" fill="#bc8cff">mission_candidate</text>
+
+  <!-- Arrow mission_candidate -> filed -->
+  <line x1="722" y1="228" x2="643" y2="96" stroke="#7ee787" stroke-width="1.5" stroke-dasharray="5,3" opacity="0.4"/>
+  <polygon points="638,100 645,92 649,102" fill="#7ee787" opacity="0.4"/>
+  <text x="698" y="150" font-family="monospace" font-size="9" fill="#7ee787" opacity="0.6">filed</text>
+
+  <!-- Branch from queued down to deduped -->
+  <line x1="243" y1="153" x2="243" y2="298" stroke="#d29922" stroke-width="1.5" opacity="0.5"/>
+  <polygon points="238,298 243,310 248,298" fill="#d29922" opacity="0.5"/>
+
+  <!-- DEDUPED state (terminal) -->
+  <rect x="173" y="313" width="140" height="38" rx="19" fill="#1c2333" stroke="#d29922" stroke-width="2"/>
+  <text x="243" y="336" text-anchor="middle" font-family="monospace" font-size="12" fill="#d29922" font-weight="600">deduped</text>
+  <text x="243" y="366" text-anchor="middle" font-family="monospace" font-size="9" fill="#8b949e">fingerprint or Jaccard</text>
+
+  <!-- Branch from processing down to discarded -->
+  <line x1="405" y1="153" x2="405" y2="298" stroke="#8b949e" stroke-width="1.5" opacity="0.4"/>
+  <polygon points="400,298 405,310 410,298" fill="#8b949e" opacity="0.4"/>
+  <text x="393" y="230" font-family="monospace" font-size="9" fill="#8b949e" transform="rotate(-90,393,230)">scout: discard</text>
+
+  <!-- DISCARDED state (terminal) -->
+  <rect x="350" y="313" width="110" height="38" rx="19" fill="#1c2333" stroke="#8b949e" stroke-width="2"/>
+  <text x="405" y="336" text-anchor="middle" font-family="monospace" font-size="12" fill="#8b949e" font-weight="600">discarded</text>
+
+  <!-- Branch from processing down to failed -->
+  <line x1="445" y1="153" x2="545" y2="313" stroke="#f85149" stroke-width="1.5" opacity="0.5"/>
+  <polygon points="540,308 548,318 546,307" fill="#f85149" opacity="0.5"/>
+  <text x="515" y="258" font-family="monospace" font-size="9" fill="#f85149" opacity="0.7">librarian error</text>
+
+  <!-- FAILED state (terminal) -->
+  <rect x="505" y="313" width="90" height="38" rx="19" fill="#1c2333" stroke="#f85149" stroke-width="2"/>
+  <text x="550" y="336" text-anchor="middle" font-family="monospace" font-size="12" fill="#f85149" font-weight="600">failed</text>
+
+  <!-- Legend -->
+  <rect x="30" y="400" width="740" height="46" rx="8" fill="#1c2333" stroke="#30363d" stroke-width="1"/>
+  <rect x="55" y="418" width="14" height="10" rx="5" fill="#1c2333" stroke="#7ee787" stroke-width="1.5"/>
+  <text x="76" y="427" font-family="system-ui, sans-serif" font-size="10" fill="#8b949e">Success</text>
+  <rect x="145" y="418" width="14" height="10" rx="5" fill="#1c2333" stroke="#d29922" stroke-width="1.5"/>
+  <text x="166" y="427" font-family="system-ui, sans-serif" font-size="10" fill="#8b949e">Deduped</text>
+  <rect x="240" y="418" width="14" height="10" rx="5" fill="#1c2333" stroke="#f85149" stroke-width="1.5"/>
+  <text x="261" y="427" font-family="system-ui, sans-serif" font-size="10" fill="#8b949e">Failed</text>
+  <rect x="325" y="418" width="14" height="10" rx="5" fill="#1c2333" stroke="#8b949e" stroke-width="1.5"/>
+  <text x="346" y="427" font-family="system-ui, sans-serif" font-size="10" fill="#8b949e">Discarded</text>
+  <rect x="430" y="418" width="14" height="10" rx="5" fill="#1c2333" stroke="#58a6ff" stroke-width="1.5"/>
+  <text x="451" y="427" font-family="system-ui, sans-serif" font-size="10" fill="#8b949e">In-progress</text>
+  <circle cx="545" cy="423" r="4" fill="#58a6ff"/>
+  <text x="556" y="427" font-family="system-ui, sans-serif" font-size="10" fill="#8b949e">Initial state</text>
+</svg>

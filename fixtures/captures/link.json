@@ -1,0 +1,25 @@
+{
+  "id": "fixture-link",
+  "source": "context-menu",
+  "url": "https://github.com/example/interesting-repo",
+  "title": "example/interesting-repo",
+  "site_name": "GitHub",
+  "author": "",
+  "body_text": "",
+  "selected": "",
+  "headings": [],
+  "links": [],
+  "images": [],
+  "tweet": null,
+  "meta": {
+    "og:type": "object",
+    "og:description": "A repository for interesting things"
+  },
+  "captured_at": "2026-04-07T14:33:00Z",
+  "status": "queued",
+  "ingest_state": "captured",
+  "fingerprint": "",
+  "duplicate_of": "",
+  "error": "",
+  "vault_path": ""
+}

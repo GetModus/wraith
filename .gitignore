@@ -1,0 +1,16 @@
+# Data files (never commit user data)
+wraith-queue.json
+wraith-state.json
+wraith-officer-handoffs.jsonl
+
+# Build artifacts
+wraith-bridge
+*.exe
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.DS_Store

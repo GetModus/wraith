@@ -1,0 +1,52 @@
+{
+  "manifest_version": 2,
+  "name": "MODUS Bridge",
+  "version": "1.0.0",
+  "description": "Persistent browser bridge for MODUS over a local WebSocket.",
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "storage",
+    "contextMenus",
+    "http://127.0.0.1:8781/*",
+    "http://localhost:8781/*",
+    "ws://127.0.0.1:8781/*",
+    "ws://localhost:8781/*",
+    "http://127.0.0.1:8780/*",
+    "http://localhost:8780/*",
+    "ws://127.0.0.1:8780/*",
+    "ws://localhost:8780/*",
+    "http://127.0.0.1:8782/*",
+    "http://localhost:8782/*",
+    "ws://127.0.0.1:8782/*",
+    "ws://localhost:8782/*",
+    "http://127.0.0.1:8783/*",
+    "http://localhost:8783/*",
+    "ws://127.0.0.1:8783/*",
+    "ws://localhost:8783/*",
+    "<all_urls>"
+  ],
+  "background": {
+    "page": "src/background.html",
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "src/content.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "browser_action": {
+    "default_title": "MODUS Bridge"
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  }
+}

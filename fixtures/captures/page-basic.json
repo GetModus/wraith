@@ -1,0 +1,35 @@
+{
+  "id": "fixture-page-basic",
+  "source": "context-menu",
+  "url": "https://example.com/go-release",
+  "title": "Go 1.24 Released",
+  "site_name": "Example Blog",
+  "author": "Jane Doe",
+  "body_text": "The Go team is pleased to announce the release of Go 1.24, the latest major version of the Go programming language. This release brings significant improvements to the standard library, runtime performance, and developer tooling.\n\nThe most notable change is the introduction of generic type aliases, which allow developers to create parameterized type aliases that work seamlessly with the existing generics system introduced in Go 1.18. This closes one of the most requested features since generics landed.\n\nRuntime performance sees a measurable improvement with the new garbage collector scheduling algorithm. Benchmarks show a 5-8% reduction in GC pause times for heap-heavy workloads, particularly benefiting long-running server applications.\n\nThe go vet tool has been enhanced with three new analyzers that catch common mistakes in concurrent code, including misuse of sync.Once and accidental copies of sync.Mutex values.\n\nAdditionally, the net/http package now supports HTTP/3 as an experimental feature behind a GODEBUG flag. Early adopters can enable it to test QUIC-based connections in their existing HTTP server infrastructure.\n\nDevelopers are encouraged to upgrade using the standard toolchain update process. The full release notes contain migration guidance for the small number of breaking changes in this version.",
+  "selected": "",
+  "headings": [
+    {"level": 1, "text": "Go 1.24 Released"},
+    {"level": 2, "text": "Generic Type Aliases"},
+    {"level": 2, "text": "Runtime Improvements"}
+  ],
+  "links": [
+    {"text": "Release Notes", "href": "https://example.com/go-release/notes"},
+    {"text": "Download", "href": "https://example.com/dl/go1.24"},
+    {"text": "Migration Guide", "href": "https://example.com/go-release/migration"},
+    {"text": "Go Blog", "href": "https://example.com/blog"},
+    {"text": "Source Code", "href": "https://example.com/go/src"}
+  ],
+  "images": [],
+  "tweet": null,
+  "meta": {
+    "og:type": "article",
+    "og:image": "https://example.com/images/go124-banner.png"
+  },
+  "captured_at": "2026-04-07T14:30:00Z",
+  "status": "queued",
+  "ingest_state": "captured",
+  "fingerprint": "",
+  "duplicate_of": "",
+  "error": "",
+  "vault_path": ""
+}
