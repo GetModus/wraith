@@ -13,7 +13,7 @@
 
 Browser intelligence capture for personal knowledge vaults.
 
-WRAITH watches what you save — bookmarks, selections, tweets, starred repos — and files them as searchable markdown in your vault. A Safari extension captures pages over WebSocket. Five ingestion sources pull from X, GitHub, Reddit, YouTube, and Audible. A two-officer pipeline (Scout → Librarian) classifies and files every capture with an auditable handoff trail.
+WRAITH watches what you save — bookmarks, selections, tweets, starred repos — and files them as searchable markdown in your vault. Two control surfaces feed the same pipeline: a Safari extension captures pages over WebSocket, and an MCP server lets any AI harness enqueue captures programmatically. Five ingestion sources pull from X, GitHub, Reddit, YouTube, and Audible. A two-officer pipeline (Scout → Librarian) classifies and files every capture with an auditable handoff trail.
 
 Everything stays local. No cloud sync, no telemetry, no third-party storage.
 
@@ -45,9 +45,19 @@ Everything stays local. No cloud sync, no telemetry, no third-party storage.
 | YouTube | yt-dlp (transcripts, metadata) | None (yt-dlp handles auth) | `youtube-videos\|video_id` |
 | Audible | Private API | Safari cookie jar | `audible-highlights\|asin` |
 
-## Runtime
+## Two Runtime Modes
 
-WRAITH runs as part of the MODUS server. Relevant endpoints:
+WRAITH exposes two control surfaces over the same queue and pipeline:
+
+### Browser Bridge
+
+The WebSocket bridge accepts captures from the Safari extension in real time.
+
+```bash
+# Build and start the bridge
+go build -o wraith-bridge ./cmd/wraith-bridge/
+./wraith-bridge   # listens on 127.0.0.1:8781
+```
 
 | Endpoint | Method | Description |
 |----------|--------|-------------|
@@ -58,16 +68,60 @@ WRAITH runs as part of the MODUS server. Relevant endpoints:
 
 Default port: 8781. The Safari extension probes ports 8781, 8782, 8783, 8780 for daemon discovery. The WebSocket bridge accepts connections from browser-extension origins (`safari-web-extension://`, `chrome-extension://`, `moz-extension://`) in addition to localhost.
 
+### MCP Server
+
+The MCP server exposes the same pipeline as tool calls, so any MCP-compatible harness (Claude Code, Cursor, Windsurf, custom agents) can enqueue captures, inspect the queue, and trigger processing — no browser required.
+
+```bash
+# Build and start the MCP server
+go build -o wraith-mcp ./cmd/wraith-mcp/
+./wraith-mcp   # speaks MCP over stdio
+```
+
+| Tool | Description |
+|------|-------------|
+| `wraith_status` | Queue statistics and source-level ingest counts |
+| `wraith_queue` | Inspect pending captures |
+| `wraith_capture` | Enqueue a capture directly (source, URL, title, body, tweet payload) |
+| `wraith_process` | Process queued captures through YouTube routing, Scout, and Librarian |
+| `wraith_sources` | Source-level ingest statistics from state |
+
+Both modes write to the same queue, state, and vault. You can run the bridge and MCP server simultaneously — they share the data directory.
+
+### Use WRAITH from Another Harness
+
+Add `wraith-mcp` as an MCP server in your tool's config:
+
+```json
+{
+  "mcpServers": {
+    "wraith": {
+      "command": "wraith-mcp",
+      "env": {
+        "MODUS_VAULT_DIR": "~/vault",
+        "MODUS_DATA_DIR": "~/vault/data"
+      }
+    }
+  }
+}
+```
+
+Then use `wraith_capture` to submit content and `wraith_process` to run the pipeline. No Safari, no WebSocket, no browser needed.
+
 ## Quickstart
 
 ```bash
-# Build the bridge
+# Build both binaries
 go build -o wraith-bridge ./cmd/wraith-bridge/
+go build -o wraith-mcp ./cmd/wraith-mcp/
 
-# Start the bridge (listens on 127.0.0.1:8781)
+# Option A: Browser capture (Safari extension → WebSocket)
 ./wraith-bridge
 
-# Check WRAITH status
+# Option B: MCP capture (any harness → stdio)
+./wraith-mcp
+
+# Check status (bridge mode)
 curl -s http://127.0.0.1:8781/wraith/status | jq .
 
 # Run tests
@@ -118,8 +172,10 @@ All transitions are recorded in `ingest_history[]` on the Capture struct with ti
 ## Project Structure
 
 ```
-cmd/wraith-bridge/          Standalone bridge binary
+cmd/wraith-bridge/          WebSocket bridge binary (browser capture)
+cmd/wraith-mcp/             MCP server binary (harness capture)
 internal/wraith/            Core package (queue, state, consumer, officers, ingestion)
+internal/mcp/               MCP tool registrations (wraith_status, wraith_capture, etc.)
 internal/server/            WebSocket bridge
 internal/markdown/          YAML frontmatter markdown parser
 internal/moduscfg/          Officer configuration

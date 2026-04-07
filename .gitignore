@@ -14,3 +14,6 @@ wraith-bridge
 *.swo
 *~
 .DS_Store
+# Compiled binaries
+wraith-bridge
+wraith-mcp

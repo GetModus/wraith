@@ -2,24 +2,39 @@
 
 ## Package Layout
 
-The WRAITH system spans three locations in the repository:
+WRAITH has two control surfaces feeding one shared pipeline:
 
 | Component | Path | Role |
 |-----------|------|------|
-| Core package | `go/internal/wraith/` | Queue, state, officers, ingestion, triage, cookies, Safari automation |
-| WebSocket bridge | `go/internal/server/wraith.go` | Receives captures from the Safari extension over WebSocket |
-| Safari extension | `apps/MODUSBridge/MODUS Bridge/MODUS Bridge Extension/Resources/src/` | Content extraction and real-time capture |
+| Core package | `internal/wraith/` | Queue, state, officers, ingestion, triage, cookies, Safari automation |
+| WebSocket bridge | `internal/server/wraith.go` | Receives captures from the Safari extension over WebSocket |
+| MCP tools | `internal/mcp/wraith.go` | Exposes queue, capture, process, status, sources as MCP tool calls |
+| Bridge binary | `cmd/wraith-bridge/main.go` | Standalone WebSocket server for browser capture |
+| MCP binary | `cmd/wraith-mcp/main.go` | Standalone MCP server for harness capture |
+| Safari extension | `extension/` | Content extraction and real-time capture |
 
-The core package contains 19 files totaling 4,732 lines of Go. No external database -- all persistence is JSON files on disk.
+No external database — all persistence is JSON files on disk.
 
-## Data Flow
+## Two Control Surfaces, One Pipeline
+
+The bridge and MCP server are independent entry points into the same queue and officer pipeline. They can run simultaneously.
 
 ```
 [Safari Extension] --WebSocket--> [WraithBridge] --Enqueue--> [Queue]
-[bird CLI / GitHub API / Reddit API / yt-dlp / Audible files] --IngestX/GitHub/Reddit/YouTube/Audible--> [State] + [Vault]
+[MCP Client]       --wraith_capture--> [MCP Server] --Enqueue--> [Queue]  (same queue)
+[bird CLI / GitHub API / Reddit API / yt-dlp / Audible] --Ingest*--> [State] + [Vault]
 [Queue] --ProcessQueue--> [Scout] --assess--> [Librarian] --file--> [Vault .md files]
 [State.PendingTriage] --Triage--> [Gemma 4 26B on :8090] --classify--> [State triage update] + [RouteTriagedFile]
 ```
+
+The MCP path provides five tools:
+- `wraith_status` — queue stats and source-level ingest counts
+- `wraith_queue` — inspect pending captures
+- `wraith_capture` — enqueue a capture directly (source, URL, title, body, tweet payload)
+- `wraith_process` — run queued captures through YouTube routing, Scout, and Librarian
+- `wraith_sources` — source-level ingest statistics
+
+The MCP server does not duplicate the pipeline. It calls the same `wraith.OpenQueue`, `wraith.Enqueue`, `wraith.ProcessQueue`, and `wraith.OpenState` functions as the bridge consumer. Queue persistence, dedup, and officer handoffs are identical regardless of entry point.
 
 ### Real-time path (extension captures)
 

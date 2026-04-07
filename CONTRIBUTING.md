@@ -8,8 +8,9 @@ WRAITH is part of the MODUS ecosystem. Contributions are welcome.
 # Go 1.22+ required
 go version
 
-# Build the bridge
+# Build both binaries
 go build -o wraith-bridge ./cmd/wraith-bridge/
+go build -o wraith-mcp ./cmd/wraith-mcp/
 
 # Run all tests
 go test ./internal/... -v
@@ -28,9 +29,11 @@ go test ./internal/... -v
 
 - [ ] `go test ./internal/... -v` passes
 - [ ] `go vet ./...` clean
+- [ ] Both binaries build: `go build ./cmd/wraith-bridge/` and `go build ./cmd/wraith-mcp/`
 - [ ] Fixture smoke test passes if queue/dedup behavior changed
 - [ ] New ingestion sources include a dedup key strategy
 - [ ] Officer pipeline changes include handoff JSONL verification
+- [ ] MCP tool changes verified: new tools registered in `internal/mcp/wraith.go`
 - [ ] No sensitive data (real URLs, cookies, API keys) in test fixtures
 
 ## Architecture Constraints

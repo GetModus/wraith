@@ -1,14 +1,42 @@
 # Operations
 
-## Server Startup
+## Runtime Modes
 
-WRAITH runs as part of the MODUS server. The WebSocket bridge is initialized when the HTTP server starts, listening on the `/wraith/ws` endpoint. The default port is 8781, but the extension probes 8780-8783.
+WRAITH has two standalone binaries. Both operate on the same queue, state, and vault files.
 
-HTTP endpoints available once the server is running:
+### Browser Bridge (`wraith-bridge`)
 
-- `GET /wraith/status` -- Bridge connection state, queue stats, handoff stats
-- `GET /wraith/queue` -- Current queue contents (up to 100 pending items)
-- `GET /wraith/sources` -- Ingestion source stats from wraith state
+The WebSocket bridge serves the Safari extension. Default port: 8781. The extension probes 8780-8783.
+
+```bash
+go build -o wraith-bridge ./cmd/wraith-bridge/
+./wraith-bridge
+```
+
+HTTP endpoints:
+
+- `GET /wraith/status` — Bridge connection state, queue stats, handoff stats
+- `GET /wraith/queue` — Current queue contents (up to 100 pending items)
+- `GET /wraith/sources` — Ingestion source stats from wraith state
+
+### MCP Server (`wraith-mcp`)
+
+The MCP server lets any MCP-compatible harness (Claude Code, Cursor, Windsurf, custom agents) control the pipeline over stdio.
+
+```bash
+go build -o wraith-mcp ./cmd/wraith-mcp/
+./wraith-mcp
+```
+
+MCP tools: `wraith_status`, `wraith_queue`, `wraith_capture`, `wraith_process`, `wraith_sources`. See [architecture.md](architecture.md) for tool descriptions.
+
+Environment variables for both modes:
+
+| Variable | Purpose | Default |
+|----------|---------|---------|
+| `MODUS_VAULT_DIR` | Vault root directory | `~/modus/vault` |
+| `MODUS_DATA_DIR` | Queue/state data directory | `~/modus/data` |
+| `WRAITH_PORT` | Bridge listen port | `8781` |
 
 ## Checking Status
 

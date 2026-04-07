@@ -56,6 +56,14 @@ This document separates verified claims from aspirational ones. Every verified c
 **Evidence:** `go/internal/server/server.go` — `isAllowedOrigin()` admits `safari-web-extension://`, `chrome-extension://`, `moz-extension://` in addition to localhost origins.
 **Test:** `go test ./internal/server` passes after patch. Live verification: Safari extension connects without 403 handshake failure.
 
+### MCP tools operate on the same queue as the bridge
+**Evidence:** `go/internal/mcp/wraith.go:27-28` — `wraith_status` calls `wraith.OpenQueue(dataDir)` and `wraith.OpenState(dataDir)`, the same functions used by the bridge consumer in `consumer.go`. `wraith_capture` calls `queue.Enqueue(cap)` which is the same `Queue.Enqueue` method. `wraith_process` calls `wraith.ProcessQueue(queue, state, vaultDir, limit)` — the same `ProcessQueue` function that runs the Scout→Librarian pipeline.
+**Verify:** Enqueue via `wraith_capture`, then check `/wraith/queue` on the bridge — the capture appears in both.
+
+### MCP server is a standalone binary
+**Evidence:** `go/cmd/wraith-mcp/main.go` — independent `main()` function, resolves `MODUS_VAULT_DIR` and `MODUS_DATA_DIR`, calls `mcp.RegisterWraithTools()`, runs over stdio.
+**Verify:** `go build ./cmd/wraith-mcp/` compiles independently.
+
 ## Non-Claims (Explicitly Not Guaranteed)
 
 ### Content integrity

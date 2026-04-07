@@ -2,54 +2,56 @@
 
 ## Version Tagging
 
-WRAITH is part of the MODUS Go binary. It does not have independent versioning. Releases follow the MODUS version tag format:
+WRAITH is an independent module with its own version. Tag format:
 
 ```
 git tag -a v0.X.Y -m "description"
 ```
 
-The Safari extension has its own version in `apps/MODUSBridge/MODUS Bridge/MODUS Bridge Extension/Resources/manifest.json` (currently `1.0.0`). Update this separately when the extension message format changes.
+The Safari extension has its own version in `extension/manifest.json` (currently `1.0.0`). Update this separately when the extension message format changes.
 
 ## Changelog Format
 
-Maintain a section in the release notes for WRAITH changes. Group by category:
-
-```
-### WRAITH
-- Added: new ingestion source for X
-- Changed: near-dedup threshold from 0.80 to 0.82
-- Fixed: Reddit token_v2 cookie extraction on Safari 18
-```
+Maintain `CHANGELOG.md` in the repo root. Group by category using [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) format.
 
 ## Pre-Release Verification
 
 Before tagging a release:
 
-1. **Tests pass**: `go test ./internal/wraith/ -v` -- all current WRAITH tests green
-2. **Build succeeds**: `go build ./cmd/modus/` completes without errors
-3. **Server starts**: The binary starts and `/wraith/status` responds
-4. **Extension connects**: Safari extension shows connected in the sidepanel
-5. **Capture round-trip**: Right-click "Send to MODUS" on a page, verify the queue shows a new item and processing produces a vault file
-6. **Source ingestion**: Run at least one batch source (e.g., GitHub with a small `maxItems`) and verify state records appear
+1. **Tests pass**: `go test ./internal/... -v` — all WRAITH tests green (wraith, mcp, server, markdown)
+2. **Both binaries build**: `go build ./cmd/wraith-bridge/` and `go build ./cmd/wraith-mcp/`
+3. **Bridge starts**: `./wraith-bridge` starts and `/wraith/status` responds
+4. **MCP starts**: `./wraith-mcp` starts and responds to MCP tool calls
+5. **Extension connects**: Safari extension shows connected in the sidepanel (bridge mode)
+6. **Capture round-trip (bridge)**: Right-click "Send to MODUS" on a page, verify queue and vault file
+7. **Capture round-trip (MCP)**: Call `wraith_capture` then `wraith_process`, verify vault file
+8. **Source ingestion**: Run at least one batch source and verify state records appear
+9. **Smoke test**: `make smoke` passes all 4 phases
 
 ## Build Commands
 
 ```bash
-cd go
+# Build both binaries
+go build -o wraith-bridge ./cmd/wraith-bridge/
+go build -o wraith-mcp ./cmd/wraith-mcp/
 
-# Build the binary
-go build -o modus ./cmd/modus/
-
-# Run tests
-go test ./internal/wraith/ -v
+# Run all tests
+go test ./internal/... -v
 
 # Build with version info (optional)
-go build -ldflags "-X main.version=$(git describe --tags)" -o modus ./cmd/modus/
+go build -ldflags "-X main.version=$(git describe --tags)" -o wraith-bridge ./cmd/wraith-bridge/
 ```
 
 ## Binary Size
 
-The MODUS binary includes the full agent framework, MCP server, web console, and WRAITH. Expect approximately 15-25 MB depending on build flags. WRAITH itself contributes a small fraction -- it has no CGO dependencies and minimal third-party imports (only `gorilla/websocket` for the bridge).
+Each binary is approximately 6-8 MB. WRAITH has no CGo dependencies and minimal third-party imports (only `gorilla/websocket` for the bridge). The MCP binary is slightly smaller (no websocket dependency).
+
+## Entrypoints
+
+| Binary | Path | Purpose |
+|--------|------|---------|
+| `wraith-bridge` | `cmd/wraith-bridge/main.go` | WebSocket server for Safari extension capture |
+| `wraith-mcp` | `cmd/wraith-mcp/main.go` | MCP server for harness capture (Claude Code, Cursor, etc.) |
 
 ## Extension Distribution
 

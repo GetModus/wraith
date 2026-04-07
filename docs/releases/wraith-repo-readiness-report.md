@@ -175,3 +175,7 @@ go build -tags nollamacpp ./...
 - [ ] TODO: Machine-assert exact fixture expected outcomes
 - [ ] TODO: Human review of all docs for accuracy
 - [x] Repo name decided: `GetModus/wraith`
+- [x] MCP control surface documented in README, architecture, operations, release, claims docs
+- [x] `wraith-mcp` binary entry point at `cmd/wraith-mcp/main.go`
+- [x] 5 MCP tools registered: wraith_status, wraith_queue, wraith_capture, wraith_process, wraith_sources
+- [x] CHANGELOG updated with v0.1.0 and v0.2.0 entries

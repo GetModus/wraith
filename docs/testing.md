@@ -16,14 +16,31 @@ All tests use `t.TempDir()` for isolated data and vault directories. No external
 ## Running Tests
 
 ```bash
-cd go
+# All WRAITH tests
+go test ./internal/... -v
+
+# Core pipeline tests only
 go test ./internal/wraith/ -v
+
+# MCP tool tests
+go test ./internal/mcp/ -v
+
+# Server tests
+go test ./internal/server/ -v
 ```
 
 To run a specific test:
 
 ```bash
 go test ./internal/wraith/ -run TestAcceptanceCaptureToQueueScoutLibrarianFile -v
+```
+
+## Build Verification
+
+```bash
+# Both binaries
+go build -o wraith-bridge ./cmd/wraith-bridge/
+go build -o wraith-mcp ./cmd/wraith-mcp/
 ```
 
 ## Fixture Usage
