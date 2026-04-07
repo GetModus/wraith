@@ -40,9 +40,27 @@ if [ "$INVALID" -gt 0 ]; then
 fi
 echo "    All fixture JSON valid."
 
-# Phase 3: Run Go unit tests
+# Phase 3: Build both binaries
 echo ""
-echo "--- Phase 3: Go unit tests ---"
+echo "--- Phase 3: Build verification ---"
+cd "$REPO_DIR"
+if go build ./cmd/wraith-bridge/ 2>&1; then
+    echo "    wraith-bridge: BUILD OK"
+else
+    echo "FAIL: wraith-bridge build failed"
+    exit 1
+fi
+if go build ./cmd/wraith-mcp/ 2>&1; then
+    echo "    wraith-mcp: BUILD OK"
+else
+    echo "FAIL: wraith-mcp build failed"
+    exit 1
+fi
+rm -f wraith-bridge wraith-mcp
+
+# Phase 3b: Run Go unit tests
+echo ""
+echo "--- Phase 3b: Go unit tests ---"
 cd "$REPO_DIR"
 if go test ./internal/... -count=1 2>&1; then
     echo "    All WRAITH tests pass."

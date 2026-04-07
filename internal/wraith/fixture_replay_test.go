@@ -67,13 +67,15 @@ func TestFixtureReplayDedup(t *testing.T) {
 	}
 }
 
-// locateFixtures walks up from the test file to find wraith/fixtures/.
+// locateFixtures walks up from the test file to find fixtures/.
 func locateFixtures(t *testing.T) string {
 	t.Helper()
-	// We're in go/internal/wraith/ — fixtures are at ../../wraith/fixtures/ relative to go/
+	// In standalone repo: internal/wraith/ → fixtures is at ../../fixtures/
+	// In monorepo: go/internal/wraith/ → fixtures at ../../../wraith/fixtures/
 	candidates := []string{
-		"../../../wraith/fixtures",    // from go/internal/wraith/
-		"../../wraith/fixtures",       // fallback
+		"../../fixtures",              // standalone repo (internal/wraith/ → root)
+		"../../../wraith/fixtures",    // monorepo (go/internal/wraith/)
+		"../../wraith/fixtures",       // monorepo fallback
 		"../../../../wraith/fixtures", // deeper nesting
 	}
 	for _, c := range candidates {
