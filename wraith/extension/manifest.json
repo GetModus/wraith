@@ -1,0 +1,41 @@
+{
+  "manifest_version": 3,
+  "name": "Trace Bridge",
+  "version": "1.0",
+  "description": "Trace local browser bridge",
+  "permissions": [
+    "activeTab",
+    "cookies",
+    "storage"
+  ],
+  "host_permissions": [
+    "<all_urls>",
+    "http://127.0.0.1/*",
+    "ws://127.0.0.1/*",
+    "*://x.com/*",
+    "*://twitter.com/*",
+    "*://old.reddit.com/*",
+    "*://www.reddit.com/*",
+    "*://grok.x.ai/*"
+  ],
+  "action": {
+    "default_title": "Trace Bridge"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>",
+        "*://x.com/*",
+        "*://twitter.com/*",
+        "*://old.reddit.com/*",
+        "*://www.reddit.com/*",
+        "*://grok.x.ai/*"
+      ],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ]
+}
